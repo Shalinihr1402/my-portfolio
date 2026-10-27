@@ -1,164 +1,112 @@
-import { useEffect, useRef } from "react";
 import "./styles/WhatIDo.css";
 
 const WhatIDo = () => {
-  const containerRef = useRef<(HTMLDivElement | null)[]>([]);
-  const setRef = (el: HTMLDivElement | null, index: number) => {
-    containerRef.current[index] = el;
-  };
-
-  useEffect(() => {
-    const handleCardClick = (targetCard: HTMLDivElement) => {
-      containerRef.current.forEach((card) => {
-        if (!card) return;
-        if (card === targetCard) {
-          card.classList.add("what-content-active");
-          card.classList.remove("what-sibling");
-        } else {
-          card.classList.remove("what-content-active");
-          card.classList.add("what-sibling");
-        }
-      });
-    };
-
-    containerRef.current.forEach((container) => {
-      if (container) {
-        container.addEventListener("click", () => handleCardClick(container));
-      }
-    });
-
-    return () => {
-      containerRef.current.forEach((container) => {
-        if (container) {
-          container.removeEventListener("click", () =>
-            handleCardClick(container)
-          );
-        }
-      });
-    };
-  }, []);
-
   return (
-    <div className="whatIDO">
-      <div className="what-box">
-        <h2 className="title">
-          W<span className="hat-h2">HAT</span>
-          <div>
-            I<span className="do-h2"> DO</span>
+    <div className="whatIDO" id="skills">
+      <div className="skills-wrapper">
+        <div className="skills-header">
+          <div className="skills-pill">
+            <span className="skills-pill-dot"></span>
+            <span>CORE COMPETENCIES</span>
           </div>
-        </h2>
-      </div>
-      <div className="what-box">
-        <div className="what-box-in">
-          <div className="what-border2">
-            <svg width="100%">
-              <line
-                x1="0"
-                y1="0"
-                x2="0"
-                y2="100%"
-                stroke="white"
-                strokeWidth="2"
-                strokeDasharray="7,7"
-              />
-              <line
-                x1="100%"
-                y1="0"
-                x2="100%"
-                y2="100%"
-                stroke="white"
-                strokeWidth="2"
-                strokeDasharray="7,7"
-              />
-            </svg>
-          </div>
-          <div
-            className="what-content what-noTouch what-content-active"
-            ref={(el) => setRef(el, 0)}
-          >
-            <div className="what-border1">
-              <svg height="100%">
-                <line
-                  x1="0"
-                  y1="0"
-                  x2="100%"
-                  y2="0"
-                  stroke="white"
-                  strokeWidth="2"
-                  strokeDasharray="6,6"
-                />
-                <line
-                  x1="0"
-                  y1="100%"
-                  x2="100%"
-                  y2="100%"
-                  stroke="white"
-                  strokeWidth="2"
-                  strokeDasharray="6,6"
-                />
-              </svg>
-            </div>
-            <div className="what-corner"></div>
+          <h2 className="skills-main-title">
+            Technical <span className="skills-gradient-text">Expertise</span>
+          </h2>
+          <p className="skills-subtitle">
+            Architecting intelligent AI models, scalable backend systems, and clean algorithmic solutions.
+          </p>
+        </div>
 
-            <div className="what-content-in">
-              <h3>AI & ML</h3>
-              <h4>Description</h4>
-              <p>
-                I build intelligent AI systems integrating Large Language Models (Groq, OpenAI), RAG pipelines, vector search (ChromaDB), and computer vision (OpenCV, Tesseract OCR).
-              </p>
-              <h5>Skillset & tools</h5>
-              <div className="what-content-flex">
-                <div className="what-tags">LangChain</div>
-                <div className="what-tags">Groq LLM</div>
-                <div className="what-tags">OpenAI API</div>
-                <div className="what-tags">RAG</div>
-                <div className="what-tags">ChromaDB</div>
-                <div className="what-tags">scikit-learn</div>
-                <div className="what-tags">OpenCV</div>
-                <div className="what-tags">Tesseract OCR</div>
-                <div className="what-tags">FastAPI</div>
+        <div className="skills-grid">
+          {/* Pillar 1: AI & Machine Learning */}
+          <div className="skill-card skill-card-ai">
+            <div className="skill-card-top">
+              <div className="skill-icon-wrap">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c084fc" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 2a4 4 0 0 1 4 4c0 1.5-.8 2.8-2 3.5V11h3a3 3 0 0 1 3 3v1a2 2 0 0 1-2 2h-1v2a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2v-2H8a2 2 0 0 1-2-2v-1a3 3 0 0 1 3-3h3V9.5C10.8 8.8 10 7.5 10 6a4 4 0 0 1 4-4z"></path>
+                  <circle cx="12" cy="6" r="1"></circle>
+                </svg>
               </div>
-              <div className="what-arrow"></div>
+              <span className="skill-badge">SPECIALIZATION</span>
+            </div>
+
+            <h3 className="skill-title">AI & Machine Learning</h3>
+            <p className="skill-desc">
+              Building production-ready AI systems combining LLM pipelines, RAG with vector search, computer vision for document processing, and predictive ML classifiers evaluated on real-world datasets.
+            </p>
+
+            <div className="skill-tags-group">
+              <span className="skill-tag skill-tag-accent">Python</span>
+              <span className="skill-tag">scikit-learn</span>
+              <span className="skill-tag">Model Evaluation</span>
+              <span className="skill-tag skill-tag-accent">LangChain</span>
+              <span className="skill-tag">Groq LLM</span>
+              <span className="skill-tag">RAG Pipelines</span>
+              <span className="skill-tag">ChromaDB</span>
+              <span className="skill-tag">OpenCV</span>
+              <span className="skill-tag">Tesseract OCR</span>
+              <span className="skill-tag">FastAPI</span>
             </div>
           </div>
-          <div
-            className="what-content what-noTouch"
-            ref={(el) => setRef(el, 1)}
-          >
-            <div className="what-border1">
-              <svg height="100%">
-                <line
-                  x1="0"
-                  y1="100%"
-                  x2="100%"
-                  y2="100%"
-                  stroke="white"
-                  strokeWidth="2"
-                  strokeDasharray="6,6"
-                />
-              </svg>
-            </div>
-            <div className="what-corner"></div>
-            <div className="what-content-in">
-              <h3>FULL STACK & DSA</h3>
-              <h4>Description</h4>
-              <p>
-                I develop scalable full-stack web platforms using Python (FastAPI/Flask), Node.js, and React, backed by strong Data Structures & Algorithms proficiency (130+ LeetCode solved).
-              </p>
-              <h5>Skillset & tools</h5>
-              <div className="what-content-flex">
-                <div className="what-tags">Python</div>
-                <div className="what-tags">Python (DSA)</div>
-                <div className="what-tags">130+ LeetCode</div>
-                <div className="what-tags">FastAPI</div>
-                <div className="what-tags">React.js</div>
-                <div className="what-tags">TypeScript</div>
-                <div className="what-tags">Node.js</div>
-                <div className="what-tags">PostgreSQL</div>
-                <div className="what-tags">MySQL</div>
-                <div className="what-tags">WebSockets</div>
+
+          {/* Pillar 2: Full Stack & Backend */}
+          <div className="skill-card skill-card-stack">
+            <div className="skill-card-top">
+              <div className="skill-icon-wrap">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                  <line x1="8" y1="21" x2="16" y2="21"></line>
+                  <line x1="12" y1="17" x2="12" y2="21"></line>
+                </svg>
               </div>
-              <div className="what-arrow"></div>
+              <span className="skill-badge skill-badge-cyan">ENGINEERING</span>
+            </div>
+
+            <h3 className="skill-title">Full Stack & Backend</h3>
+            <p className="skill-desc">
+              Developing robust RESTful APIs, high-throughput backend services, real-time WebSocket pipelines for voice streaming, and responsive modern user interfaces with type-safe state management.
+            </p>
+
+            <div className="skill-tags-group">
+              <span className="skill-tag skill-tag-cyan">React.js</span>
+              <span className="skill-tag">TypeScript</span>
+              <span className="skill-tag">JavaScript</span>
+              <span className="skill-tag skill-tag-cyan">FastAPI</span>
+              <span className="skill-tag">Flask</span>
+              <span className="skill-tag">Node.js</span>
+              <span className="skill-tag">REST APIs</span>
+              <span className="skill-tag">WebSockets</span>
+              <span className="skill-tag">PostgreSQL</span>
+              <span className="skill-tag">MySQL</span>
+            </div>
+          </div>
+
+          {/* Pillar 3: DSA & Software Engineering */}
+          <div className="skill-card skill-card-dsa">
+            <div className="skill-card-top">
+              <div className="skill-icon-wrap">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="16 18 22 12 16 6"></polyline>
+                  <polyline points="8 6 2 12 8 18"></polyline>
+                </svg>
+              </div>
+              <span className="skill-badge">FOUNDATIONS</span>
+            </div>
+
+            <h3 className="skill-title">DSA & Software Engineering</h3>
+            <p className="skill-desc">
+              Strong core computer science foundation with disciplined complexity analysis (time & space), modular object-oriented design, and clean architecture. Solved 130+ LeetCode problems in Java.
+            </p>
+
+            <div className="skill-tags-group">
+              <span className="skill-tag skill-tag-accent">Java</span>
+              <span className="skill-tag">Data Structures</span>
+              <span className="skill-tag">Algorithms</span>
+              <span className="skill-tag skill-tag-accent">130+ LeetCode Solved</span>
+              <span className="skill-tag">OOP</span>
+              <span className="skill-tag">Problem Solving</span>
+              <span className="skill-tag">Clean Architecture</span>
+              <span className="skill-tag">Git & CI/CD</span>
             </div>
           </div>
         </div>

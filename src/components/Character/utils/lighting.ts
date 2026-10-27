@@ -3,9 +3,19 @@ import { RGBELoader } from "three-stdlib";
 import { gsap } from "gsap";
 
 const setLighting = (scene: THREE.Scene) => {
+  // Soft ambient light to keep anime textures luminous and clean
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.85);
+  scene.add(ambientLight);
+
+  // Front key light focused on face & torso
+  const frontLight = new THREE.DirectionalLight(0xfff6fd, 1.2);
+  frontLight.position.set(1, 14, 20);
+  scene.add(frontLight);
+
+  // Accent purple rim light
   const directionalLight = new THREE.DirectionalLight(0xc7a9ff, 0);
   directionalLight.intensity = 0;
-  directionalLight.position.set(-0.47, -0.32, -1);
+  directionalLight.position.set(-2, 10, -2);
   directionalLight.castShadow = true;
   directionalLight.shadow.mapSize.width = 1024;
   directionalLight.shadow.mapSize.height = 1024;
@@ -13,6 +23,7 @@ const setLighting = (scene: THREE.Scene) => {
   directionalLight.shadow.camera.far = 50;
   scene.add(directionalLight);
 
+  // Point light for glowing ambiance
   const pointLight = new THREE.PointLight(0xc2a4ff, 0, 100, 3);
   pointLight.position.set(3, 12, 4);
   pointLight.castShadow = true;
@@ -28,14 +39,16 @@ const setLighting = (scene: THREE.Scene) => {
     });
 
   function setPointLight(screenLight: any) {
-    if (screenLight.material.opacity > 0.9) {
+    if (screenLight && screenLight.material && screenLight.material.opacity > 0.9) {
       pointLight.intensity = screenLight.material.emissiveIntensity * 20;
     } else {
       pointLight.intensity = 0;
     }
   }
+
   const duration = 2;
   const ease = "power2.inOut";
+
   function turnOnLights() {
     gsap.to(scene, {
       environmentIntensity: 0.64,
@@ -43,7 +56,12 @@ const setLighting = (scene: THREE.Scene) => {
       ease: ease,
     });
     gsap.to(directionalLight, {
-      intensity: 1,
+      intensity: 1.2,
+      duration: duration,
+      ease: ease,
+    });
+    gsap.to(frontLight, {
+      intensity: 1.4,
       duration: duration,
       ease: ease,
     });

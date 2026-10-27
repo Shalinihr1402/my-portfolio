@@ -1,8 +1,6 @@
 import * as THREE from "three";
 import { DRACOLoader, GLTF, GLTFLoader } from "three-stdlib";
 import { setCharTimeline, setAllTimeline } from "../../utils/GsapScroll";
-import { decryptFile } from "./decrypt";
-import { feminizeCharacter } from "./feminizeCharacter";
 
 const setCharacter = (
   renderer: THREE.WebGLRenderer,
@@ -15,46 +13,47 @@ const setCharacter = (
   loader.setDRACOLoader(dracoLoader);
 
   const loadCharacter = () => {
-    return new Promise<GLTF | null>(async (resolve, reject) => {
-      try {
-        const encryptedBlob = await decryptFile(
-          "/models/character.enc",
-          "Character3D#@"
-        );
-        const blobUrl = URL.createObjectURL(new Blob([encryptedBlob]));
+    return new Promise<GLTF | null>((resolve, reject) => {
+      loader.load(
+        "/models/anime_girl.glb",
+        async (gltf) => {
+          const character = gltf.scene;
 
-        let character: THREE.Object3D;
-        loader.load(
-          blobUrl,
-          async (gltf) => {
-            character = gltf.scene;
-            feminizeCharacter(character);
-            await renderer.compileAsync(character, camera, scene);
-            character.traverse((child: any) => {
-              if (child.isMesh) {
-                const mesh = child as THREE.Mesh;
-                child.castShadow = true;
-                child.receiveShadow = true;
-                mesh.frustumCulled = true;
+          // Scale and frame the anime girl nicely in the hero camera view
+          character.scale.set(6.2, 6.2, 6.2);
+          character.position.set(0, 4.4, 0);
+
+          character.traverse((child: any) => {
+            if (child.isMesh) {
+              const mesh = child as THREE.Mesh;
+              mesh.castShadow = true;
+              mesh.receiveShadow = true;
+              mesh.frustumCulled = false;
+
+              if (mesh.material) {
+                const mat = mesh.material as any;
+                mat.side = THREE.DoubleSide;
+                mat.roughness = Math.min(mat.roughness ?? 0.7, 0.75);
+                mat.metalness = Math.min(mat.metalness ?? 0.05, 0.1);
+                if (mat.map) {
+                  mat.map.colorSpace = THREE.SRGBColorSpace;
+                }
               }
-            });
-            resolve(gltf);
-            setCharTimeline(character, camera);
-            setAllTimeline();
-            character!.getObjectByName("footR")!.position.y = 3.36;
-            character!.getObjectByName("footL")!.position.y = 3.36;
-            dracoLoader.dispose();
-          },
-          undefined,
-          (error) => {
-            console.error("Error loading GLTF model:", error);
-            reject(error);
-          }
-        );
-      } catch (err) {
-        reject(err);
-        console.error(err);
-      }
+            }
+          });
+
+          await renderer.compileAsync(character, camera, scene);
+          resolve(gltf);
+          setCharTimeline(character, camera);
+          setAllTimeline();
+          dracoLoader.dispose();
+        },
+        undefined,
+        (error) => {
+          console.error("Error loading anime_girl GLTF model:", error);
+          reject(error);
+        }
+      );
     });
   };
 

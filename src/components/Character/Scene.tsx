@@ -19,7 +19,7 @@ const Scene = () => {
   const sceneRef = useRef(new THREE.Scene());
   const { setLoading } = useLoading();
 
-  const [character, setChar] = useState<THREE.Object3D | null>(null);
+  const [, setChar] = useState<THREE.Object3D | null>(null);
   useEffect(() => {
     if (canvasDiv.current) {
       let rect = canvasDiv.current.getBoundingClientRect();
@@ -61,7 +61,10 @@ const Scene = () => {
           let character = gltf.scene;
           setChar(character);
           scene.add(character);
-          headBone = character.getObjectByName("spine006") || null;
+          headBone =
+            character.getObjectByName("CC_Base_Head_040") ||
+            character.getObjectByName("spine006") ||
+            null;
           screenLight = character.getObjectByName("screenlight") || null;
           progress.loaded().then(() => {
             setTimeout(() => {
@@ -108,6 +111,10 @@ const Scene = () => {
       }
       const animate = () => {
         requestAnimationFrame(animate);
+        const delta = clock.getDelta();
+        if (mixer) {
+          mixer.update(delta);
+        }
         if (headBone) {
           handleHeadRotation(
             headBone,
@@ -117,11 +124,9 @@ const Scene = () => {
             interpolation.y,
             THREE.MathUtils.lerp
           );
-          light.setPointLight(screenLight);
         }
-        const delta = clock.getDelta();
-        if (mixer) {
-          mixer.update(delta);
+        if (screenLight) {
+          light.setPointLight(screenLight);
         }
         renderer.render(scene, camera);
       };
