@@ -86,7 +86,7 @@ const Work = () => {
               </div>
             </div>
 
-            <WorkImage image="1.jpeg" alt="AI Career Counselor Project" />
+            <WorkImage image="AI-Career-Councelor1.jpeg" alt="AI Career Counselor Project" />
           </div>
 
           {/* Project 02: ScholarSense AI */}
@@ -120,7 +120,7 @@ const Work = () => {
               </div>
             </div>
 
-            <WorkImage image="2.jpeg" alt="ScholarSense AI Project" />
+            <WorkImage image="Scholar-sense-ai.jpeg" alt="ScholarSense AI Project" />
           </div>
 
           {/* Project 03: GMU Voice Assistant */}
@@ -154,7 +154,7 @@ const Work = () => {
               </div>
             </div>
 
-            <WorkImage image="3.jpeg" alt="GMU Intelligent Voice Assistant Project" />
+            <WorkImage image="Gmu-Voice-Assistant.jpeg" alt="GMU Intelligent Voice Assistant Project" />
           </div>
         </div>
       </div>

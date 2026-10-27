@@ -7,7 +7,7 @@ const About = () => {
         <h3 className="title">About Me</h3>
         <p className="para">
 
-I’m Shalini H R, an aspiring AI/ML Software Engineer and Python Full Stack Developer with an MCA background from GM University. I build intelligent, data-driven systems leveraging Large Language Models (LLMs), RAG pipelines, vector embeddings, and computer vision alongside robust web backends. Grounded in strong Data Structures & Algorithms problem-solving with 130+ LeetCode problems solved in Java, I am driven to build scalable, high-impact software that solves real-world challenges.
+I’m Shalini H R, an MCA Graduate and aspiring AI/ML Software Engineer who learns by building, experimenting, contributing to open source. With 130+ DSA problems solved, I focus on turning AI/ML concepts into deployed, practical solutions—breaking complex real-world problems into small, meaningful systems that create impact.
         </p>
       </div>
     </div>

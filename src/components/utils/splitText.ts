@@ -16,8 +16,8 @@ export default function setSplitText() {
   const paras: NodeListOf<ParaElement> = document.querySelectorAll(".para");
   const titles: NodeListOf<ParaElement> = document.querySelectorAll(".title");
 
-  const TriggerStart = window.innerWidth <= 1024 ? "top 60%" : "20% 60%";
-  const ToggleAction = "play pause resume reverse";
+  const TriggerStart = window.innerWidth <= 1024 ? "top 75%" : "top 65%";
+  const ToggleAction = "play reverse play reverse";
 
   paras.forEach((para: ParaElement) => {
     para.classList.add("visible");
@@ -31,23 +31,27 @@ export default function setSplitText() {
       linesClass: "split-line",
     });
 
+    const triggerEl = para.parentElement?.parentElement || para;
+    const isAlreadyInView = ScrollTrigger.isInViewport(triggerEl, 0.2);
+
     para.anim = gsap.fromTo(
       para.split.words,
-      { autoAlpha: 0, y: 80 },
+      { autoAlpha: isAlreadyInView ? 1 : 0, y: isAlreadyInView ? 0 : 40 },
       {
         autoAlpha: 1,
         scrollTrigger: {
-          trigger: para.parentElement?.parentElement,
+          trigger: triggerEl,
           toggleActions: ToggleAction,
           start: TriggerStart,
         },
-        duration: 1,
+        duration: 0.9,
         ease: "power3.out",
         y: 0,
-        stagger: 0.02,
+        stagger: 0.015,
       }
     );
   });
+
   titles.forEach((title: ParaElement) => {
     if (title.anim) {
       title.anim.progress(1).kill();
@@ -57,24 +61,26 @@ export default function setSplitText() {
       type: "chars,lines",
       linesClass: "split-line",
     });
+
+    const triggerEl = title.parentElement?.parentElement || title;
+    const isAlreadyInView = ScrollTrigger.isInViewport(triggerEl, 0.2);
+
     title.anim = gsap.fromTo(
       title.split.chars,
-      { autoAlpha: 0, y: 80, rotate: 10 },
+      { autoAlpha: isAlreadyInView ? 1 : 0, y: isAlreadyInView ? 0 : 40, rotate: isAlreadyInView ? 0 : 6 },
       {
         autoAlpha: 1,
         scrollTrigger: {
-          trigger: title.parentElement?.parentElement,
+          trigger: triggerEl,
           toggleActions: ToggleAction,
           start: TriggerStart,
         },
         duration: 0.8,
-        ease: "power2.inOut",
+        ease: "power2.out",
         y: 0,
         rotate: 0,
-        stagger: 0.03,
+        stagger: 0.02,
       }
     );
   });
-
-  ScrollTrigger.addEventListener("refresh", () => setSplitText());
 }

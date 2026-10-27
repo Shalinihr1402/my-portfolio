@@ -1,29 +1,43 @@
 import { useEffect, useRef } from "react";
 import "./styles/WhatIDo.css";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const WhatIDo = () => {
   const containerRef = useRef<(HTMLDivElement | null)[]>([]);
   const setRef = (el: HTMLDivElement | null, index: number) => {
     containerRef.current[index] = el;
   };
+
   useEffect(() => {
-    if (ScrollTrigger.isTouch) {
-      containerRef.current.forEach((container) => {
-        if (container) {
-          container.classList.remove("what-noTouch");
-          container.addEventListener("click", () => handleClick(container));
+    const handleCardClick = (targetCard: HTMLDivElement) => {
+      containerRef.current.forEach((card) => {
+        if (!card) return;
+        if (card === targetCard) {
+          card.classList.add("what-content-active");
+          card.classList.remove("what-sibling");
+        } else {
+          card.classList.remove("what-content-active");
+          card.classList.add("what-sibling");
         }
       });
-    }
+    };
+
+    containerRef.current.forEach((container) => {
+      if (container) {
+        container.addEventListener("click", () => handleCardClick(container));
+      }
+    });
+
     return () => {
       containerRef.current.forEach((container) => {
         if (container) {
-          container.removeEventListener("click", () => handleClick(container));
+          container.removeEventListener("click", () =>
+            handleCardClick(container)
+          );
         }
       });
     };
   }, []);
+
   return (
     <div className="whatIDO">
       <div className="what-box">
@@ -59,7 +73,7 @@ const WhatIDo = () => {
             </svg>
           </div>
           <div
-            className="what-content what-noTouch"
+            className="what-content what-noTouch what-content-active"
             ref={(el) => setRef(el, 0)}
           >
             <div className="what-border1">
@@ -90,11 +104,10 @@ const WhatIDo = () => {
               <h3>AI & ML</h3>
               <h4>Description</h4>
               <p>
-                I build intelligent applications integrating Large Language Models (Groq, OpenAI), vector search, and computer vision. Experienced in RAG pipelines, prompt engineering, OCR document parsing, and classification models.
+                I build intelligent AI systems integrating Large Language Models (Groq, OpenAI), RAG pipelines, vector search (ChromaDB), and computer vision (OpenCV, Tesseract OCR).
               </p>
               <h5>Skillset & tools</h5>
               <div className="what-content-flex">
-                <div className="what-tags">Python</div>
                 <div className="what-tags">LangChain</div>
                 <div className="what-tags">Groq LLM</div>
                 <div className="what-tags">OpenAI API</div>
@@ -130,18 +143,20 @@ const WhatIDo = () => {
               <h3>FULL STACK & DSA</h3>
               <h4>Description</h4>
               <p>
-                I develop scalable web applications with robust Python (FastAPI/Flask) and Node.js backends, interactive React & TypeScript frontends, and SQL/NoSQL databases, backed by strong Data Structures & Algorithms proficiency (130+ LeetCode problems solved).
+                I develop scalable full-stack web platforms using Python (FastAPI/Flask), Node.js, and React, backed by strong Data Structures & Algorithms proficiency (130+ LeetCode solved).
               </p>
               <h5>Skillset & tools</h5>
               <div className="what-content-flex">
                 <div className="what-tags">Python</div>
-                <div className="what-tags">Java (DSA)</div>
+                <div className="what-tags">Python (DSA)</div>
                 <div className="what-tags">130+ LeetCode</div>
                 <div className="what-tags">FastAPI</div>
                 <div className="what-tags">React.js</div>
                 <div className="what-tags">TypeScript</div>
                 <div className="what-tags">Node.js</div>
                 <div className="what-tags">PostgreSQL</div>
+                <div className="what-tags">MySQL</div>
+                <div className="what-tags">WebSockets</div>
               </div>
               <div className="what-arrow"></div>
             </div>
@@ -153,18 +168,3 @@ const WhatIDo = () => {
 };
 
 export default WhatIDo;
-
-function handleClick(container: HTMLDivElement) {
-  container.classList.toggle("what-content-active");
-  container.classList.remove("what-sibling");
-  if (container.parentElement) {
-    const siblings = Array.from(container.parentElement.children);
-
-    siblings.forEach((sibling) => {
-      if (sibling !== container) {
-        sibling.classList.remove("what-content-active");
-        sibling.classList.toggle("what-sibling");
-      }
-    });
-  }
-}
