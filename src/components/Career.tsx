@@ -15,18 +15,27 @@ const Career = () => {
           <div className="career-info-box">
             <div className="career-info-in">
               <div className="career-role">
-                <h4>Trainee SQA Engineer</h4>
-                <h5>Center for Development of IT Professionals</h5>
+                <h4>Software Developer Intern</h4>
+                <h5>Gem Ventures LLP</h5>
               </div>
               <h3>2026</h3>
             </div>
             <p>
-              Executed manual & automation testing, test cases, and defect reporting following STLC.
-Managed JIRA defects and performed API & database testing using Postman and MySQL.
-Used AI-assisted testing to generate scenarios and improve test coverage
+              Built an intelligent voice assistant for university ERP using Vapi, Deepgram, and OpenAI across English, Hindi, and Kannada. Connected React.js & Flutter apps to PHP REST APIs and MySQL, and implemented a Node.js WebSocket pipeline for low-latency audio streaming.
             </p>
           </div>
-         
+          <div className="career-info-box">
+            <div className="career-info-in">
+              <div className="career-role">
+                <h4>Open Source & Hackathons</h4>
+                <h5>Smart India Hackathon & Open Source</h5>
+              </div>
+              <h3>2026</h3>
+            </div>
+            <p>
+              Merged 32 pull requests across 9 open-source projects (including TheAlgorithms/Java) focusing on backend features and edge-case handling. Built rockfall risk prediction ML classifier at Smart India Hackathon achieving 80% accuracy.
+            </p>
+          </div>
         </div>
       </div>
     </div>

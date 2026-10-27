@@ -87,23 +87,23 @@ const WhatIDo = () => {
             <div className="what-corner"></div>
 
             <div className="what-content-in">
-              <h3>DEVELOP</h3>
+              <h3>AI & ML</h3>
               <h4>Description</h4>
               <p>
-                I build responsive, user-friendly web applications using modern frontend and backend technologies. Passionate about clean code, scalable solutions, and creating seamless digital experiences.
+                I build intelligent applications integrating Large Language Models (Groq, OpenAI), vector search, and computer vision. Experienced in RAG pipelines, prompt engineering, OCR document parsing, and classification models.
               </p>
               <h5>Skillset & tools</h5>
               <div className="what-content-flex">
-                <div className="what-tags">JavaScript</div>
-                <div className="what-tags">TypeScript</div>
-                <div className="what-tags">Three.js</div>
-                <div className="what-tags">React</div>
-                <div className="what-tags">Css</div>
-                <div className="what-tags">Node.js</div>
-                <div className="what-tags">Next.js</div>
-                <div className="what-tags">Express.js</div>
-                <div className="what-tags">PHP</div>
-                <div className="what-tags">MySql</div>
+                <div className="what-tags">Python</div>
+                <div className="what-tags">LangChain</div>
+                <div className="what-tags">Groq LLM</div>
+                <div className="what-tags">OpenAI API</div>
+                <div className="what-tags">RAG</div>
+                <div className="what-tags">ChromaDB</div>
+                <div className="what-tags">scikit-learn</div>
+                <div className="what-tags">OpenCV</div>
+                <div className="what-tags">Tesseract OCR</div>
+                <div className="what-tags">FastAPI</div>
               </div>
               <div className="what-arrow"></div>
             </div>
@@ -127,21 +127,21 @@ const WhatIDo = () => {
             </div>
             <div className="what-corner"></div>
             <div className="what-content-in">
-              <h3>SQA</h3>
+              <h3>FULL STACK & DSA</h3>
               <h4>Description</h4>
               <p>
-                I focus on software quality through systematic testing, test automation, and API validation. Dedicated to identifying defects, improving test coverage, and ensuring reliable, high-quality user experiences.
+                I develop scalable web applications with robust Python (FastAPI/Flask) and Node.js backends, interactive React & TypeScript frontends, and SQL/NoSQL databases, backed by strong Data Structures & Algorithms proficiency (130+ LeetCode problems solved).
               </p>
               <h5>Skillset & tools</h5>
               <div className="what-content-flex">
-                <div className="what-tags">Playwright</div>
-                <div className="what-tags">Selenium</div>
-                <div className="what-tags">Postman</div>
-                <div className="what-tags">REST API</div>
-                <div className="what-tags">MySQL</div>
-                <div className="what-tags">Manual Testing</div>
-                <div className="what-tags">Apache JMeter</div>
-                <div className="what-tags">End-to-End Testing</div>
+                <div className="what-tags">Python</div>
+                <div className="what-tags">Java (DSA)</div>
+                <div className="what-tags">130+ LeetCode</div>
+                <div className="what-tags">FastAPI</div>
+                <div className="what-tags">React.js</div>
+                <div className="what-tags">TypeScript</div>
+                <div className="what-tags">Node.js</div>
+                <div className="what-tags">PostgreSQL</div>
               </div>
               <div className="what-arrow"></div>
             </div>

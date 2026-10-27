@@ -10,63 +10,50 @@ const Contact = () => {
           <div className="contact-box">
             <h4>Email</h4>
             <p>
-              <a href="mailto:hasnayenmasum@gmail.com" data-cursor="disable">
-                hasnayenmasum@gmail.com
+              <a href="mailto:shalinidvg16@gmail.com" data-cursor="disable">
+                shalinidvg16@gmail.com
               </a>
             </p>
             <h4>Phone</h4>
             <p>
-              <a href="tel:+8801XXXXXXXXX" data-cursor="disable">
-  +880 1730-202960
-</a>
+              <a href="tel:+917411156526" data-cursor="disable">
+                +91 74111 56526
+              </a>
             </p>
           </div>
           <div className="contact-box">
             <h4>Social</h4>
             <a
-              href="https://github.com/Muhtasim-Masum-Hasnayen"
+              href="https://github.com/Shalinihr1402"
               target="_blank"
               data-cursor="disable"
               className="contact-social"
+              rel="noreferrer"
             >
               Github <MdArrowOutward />
             </a>
             <a
-              href="https://www.linkedin.com/in/muhtasim-masum-hasnayen-048517273/"
+              href="https://www.linkedin.com/in/shalini-h-r-90862a251"
               target="_blank"
               data-cursor="disable"
               className="contact-social"
+              rel="noreferrer"
             >
               Linkedin <MdArrowOutward />
             </a>
             <a
-              href="https://x.com/HasnayenMasum"
+              href="https://shalini-hr-portfolio.vercel.app"
               target="_blank"
               data-cursor="disable"
               className="contact-social"
+              rel="noreferrer"
             >
-              Twitter <MdArrowOutward />
-            </a>
-            <a
-              href="https://www.instagram.com/mh_masum209/"
-              target="_blank"
-              data-cursor="disable"
-              className="contact-social"
-            >
-              Instagram <MdArrowOutward />
-            </a>
-            <a
-              href="https://www.facebook.com/mh.masum.908"
-              target="_blank"
-              data-cursor="disable"
-              className="contact-social"
-            >
-              Facebook <MdArrowOutward />
+              Portfolio <MdArrowOutward />
             </a>
           </div>
           <div className="contact-box">
             <h2>
-              Designed and Developed <br /> by <span>MUHTASIM MASUM HASNAYEN</span>
+              Designed and Developed <br /> by <span>SHALINI H R</span>
             </h2>
             <h5>
               <MdCopyright /> 2026

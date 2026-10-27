@@ -1,4 +1,4 @@
-# 🚀 My Portfolio Website — Muhtasim Masum Hasnayen
+# 🚀 My Portfolio Website — Shalini H R (Shalu)
 <p align="center">
   <img src="./portfolio_.gif" alt="Muhtasim Masum Hasnayen's Portfolio" width="50%">
 </p>

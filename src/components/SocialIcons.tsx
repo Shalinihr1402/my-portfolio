@@ -1,10 +1,9 @@
 import {
   FaGithub,
-  FaInstagram,
   FaLinkedinIn,
-  FaXTwitter,
-  FaFacebookF,
+  FaEnvelope,
 } from "react-icons/fa6";
+import { SiLeetcode } from "react-icons/si";
 import "./styles/SocialIcons.css";
 import { TbNotes } from "react-icons/tb";
 import { useEffect } from "react";
@@ -61,32 +60,45 @@ const SocialIcons = () => {
     <div className="icons-section">
       <div className="social-icons" data-cursor="icons" id="social">
         <span>
-          <a href="https://github.com/Muhtasim-Masum-Hasnayen" target="_blank">
+          <a
+            href="https://github.com/Shalinihr1402"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="GitHub Profile"
+          >
             <FaGithub />
           </a>
         </span>
         <span>
-          <a href="https://www.linkedin.com/in/muhtasim-masum-hasnayen-048517273/" target="_blank">
+          <a
+            href="https://www.linkedin.com/in/shalini-h-r-90862a251"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="LinkedIn Profile"
+          >
             <FaLinkedinIn />
           </a>
         </span>
         <span>
-          <a href="https://x.com/HasnayenMasum" target="_blank">
-            <FaXTwitter />
+          <a
+            href="https://leetcode.com"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="LeetCode Profile (130+ Solved)"
+          >
+            <SiLeetcode />
           </a>
         </span>
         <span>
-          <a href="https://www.instagram.com/mh_masum209/" target="_blank">
-            <FaInstagram />
-          </a>
-        </span>
-        <span>
-          <a href="https://www.facebook.com/mh.masum.908" target="_blank">
-            <FaFacebookF />
+          <a
+            href="mailto:shalinidvg16@gmail.com"
+            aria-label="Email Shalini"
+          >
+            <FaEnvelope />
           </a>
         </span>
       </div>
-      <a className="resume-button" href="#">
+      <a className="resume-button" href="#contact">
         <HoverLinks text="RESUME" />
         <span>
           <TbNotes />

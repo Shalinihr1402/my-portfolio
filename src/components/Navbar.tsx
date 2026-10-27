@@ -49,7 +49,7 @@ const Navbar = () => {
     viewBox="0 0 100 100"
     xmlns="http://www.w3.org/2000/svg"
     role="img"
-    aria-label="MMH logo"
+    aria-label="SHR logo"
   >
     <defs>
       <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -70,7 +70,7 @@ const Navbar = () => {
     />
 
     <path
-      d="M25 68 V34 L40 53 L50 39 L60 53 L75 34 V68"
+      d="M66 35 C66 28 58 24 48 24 C36 24 30 30 30 39 C30 49 40 52 56 55 C70 58 76 63 76 72 C76 82 66 86 50 86 C36 86 28 80 28 72"
       fill="none"
       stroke="url(#logoGradient)"
       strokeWidth="5"
@@ -78,18 +78,18 @@ const Navbar = () => {
       strokeLinejoin="round"
     />
 
-    <circle cx="76" cy="24" r="4" fill="#22d3ee" />
+    <circle cx="74" cy="24" r="4" fill="#22d3ee" />
   </svg>
 
-  <span className="logo-text">MASUM<span>.</span></span>
+  <span className="logo-text">SHALU<span>.</span></span>
 </a>
 
         <a
-          href="mailto:hasnayenmasum@gmail.com"
+          href="mailto:shalinidvg16@gmail.com"
           className="navbar-connect"
           data-cursor="disable"
         >
-          hasnayenmasum@gmail.com
+          shalinidvg16@gmail.com
         </a>
         <ul>
           <li>

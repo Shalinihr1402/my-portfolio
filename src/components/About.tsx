@@ -7,7 +7,7 @@ const About = () => {
         <h3 className="title">About Me</h3>
         <p className="para">
 
-I’m Muhtasim Masum Hasnayen, a CSE student passionate about software development, Quality Assurance, and AI/ML. I build practical, user-focused solutions through hands-on projects in web development, test automation, and machine learning. Driven by continuous learning and innovation, I aim to create reliable software that solves real-world problems.
+I’m Shalini H R, an aspiring AI/ML Software Engineer and Python Full Stack Developer with an MCA background from GM University. I build intelligent, data-driven systems leveraging Large Language Models (LLMs), RAG pipelines, vector embeddings, and computer vision alongside robust web backends. Grounded in strong Data Structures & Algorithms problem-solving with 130+ LeetCode problems solved in Java, I am driven to build scalable, high-impact software that solves real-world challenges.
         </p>
       </div>
     </div>

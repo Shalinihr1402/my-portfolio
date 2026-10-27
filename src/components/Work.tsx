@@ -8,158 +8,157 @@ gsap.registerPlugin(useGSAP);
 
 const Work = () => {
   useGSAP(() => {
-  let translateX: number = 0;
+    let translateX: number = 0;
 
-  function setTranslateX() {
-    const box = document.getElementsByClassName("work-box");
-    const rectLeft = document
-      .querySelector(".work-container")!
-      .getBoundingClientRect().left;
-    const rect = box[0].getBoundingClientRect();
-    const parentWidth = box[0].parentElement!.getBoundingClientRect().width;
-    let padding: number =
-      parseInt(window.getComputedStyle(box[0]).padding) / 2;
-    translateX = rect.width * box.length - (rectLeft + parentWidth) + padding;
-  }
+    function setTranslateX() {
+      const box = document.getElementsByClassName("work-box");
+      const rectLeft = document
+        .querySelector(".work-container")!
+        .getBoundingClientRect().left;
+      const rect = box[0].getBoundingClientRect();
+      const parentWidth = box[0].parentElement!.getBoundingClientRect().width;
+      let padding: number =
+        parseInt(window.getComputedStyle(box[0]).padding) / 2;
+      translateX = rect.width * box.length - (rectLeft + parentWidth) + padding;
+    }
 
-  setTranslateX();
+    setTranslateX();
 
-  let timeline = gsap.timeline({
-    scrollTrigger: {
-      trigger: ".work-section",
-      start: "top top",
-      end: `+=${translateX}`, // Use actual scroll width
-      scrub: true,
-      pin: true,
-      id: "work",
-    },
-  });
+    let timeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".work-section",
+        start: "top top",
+        end: `+=${translateX}`, // Use actual scroll width
+        scrub: true,
+        pin: true,
+        id: "work",
+      },
+    });
 
-  timeline.to(".work-flex", {
-    x: -translateX,
-    ease: "none",
-  });
+    timeline.to(".work-flex", {
+      x: -translateX,
+      ease: "none",
+    });
 
-  // Clean up (optional, good practice)
-  return () => {
-    timeline.kill();
-    ScrollTrigger.getById("work")?.kill();
-  };
-}, []);
+    // Clean up
+    return () => {
+      timeline.kill();
+      ScrollTrigger.getById("work")?.kill();
+    };
+  }, []);
+
   return (
-   <div className="work-section" id="work">
-  <div className="work-container section-container">
-    <h2>
-      My <span>Work</span>
-    </h2>
+    <div className="work-section" id="work">
+      <div className="work-container section-container">
+        <h2>
+          My <span>Work</span>
+        </h2>
 
-    <div className="work-flex">
+        <div className="work-flex">
+          {/* Project 01: AI Career Counselor */}
+          <div className="work-box" key="ai-career-counselor">
+            <div className="work-info">
+              <div className="work-title">
+                <h3>01</h3>
+                <div>
+                  <h4>AI Career Counselor</h4>
+                  <p>Resume Skill Gap & Roadmap App</p>
+                </div>
+              </div>
 
-      {/* Project 01: CoverCraft */}
-      <div className="work-box" key="covercraft">
-        <div className="work-info">
-          <div className="work-title">
-            <h3>01</h3>
-            <div>
-              <h4>CoverCraft</h4>
-              <p>Document Generation Platform</p>
+              <h4>Tools and Features</h4>
+              <p>Python, FastAPI, Groq LLM, React, TypeScript, Supabase PostgreSQL</p>
+
+              <p>
+                Reads PDF resumes via PyMuPDF and Groq LLM returning structured JSON.
+                Compares skills with 1000+ O*NET careers using vector embeddings
+                to detect missing prerequisites and builds weekly learning roadmaps.
+              </p>
+
+              <div className="project-links">
+                <a
+                  href="https://github.com/Shalinihr1402"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  GitHub ↗
+                </a>
+              </div>
             </div>
+
+            <WorkImage image="1.jpeg" alt="AI Career Counselor Project" />
           </div>
 
-          <h4>Tools and Features</h4>
-          <p>Next.js, FastAPI, Python, Vercel, Render</p>
+          {/* Project 02: ScholarSense AI */}
+          <div className="work-box" key="scholarsense-ai">
+            <div className="work-info">
+              <div className="work-title">
+                <h3>02</h3>
+                <div>
+                  <h4>ScholarSense AI</h4>
+                  <p>Scholarship Risk Assessment with OCR</p>
+                </div>
+              </div>
 
-          <p>
-            A web-based platform that helps students generate
-            professional academic cover pages and export documents.
-          </p>
+              <h4>Tools and Features</h4>
+              <p>Python, Flask, Tesseract OCR, OpenCV, scikit-learn, MySQL, Chart.js</p>
 
-          <div className="project-links">
-            <a
-              href="https://cover-craft-chi.vercel.app/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Live Demo ↗
-            </a>
+              <p>
+                Automated scholarship verification pipeline parsing student documents
+                with Tesseract OCR and OpenCV. Flags anomalous applications using a
+                trained scikit-learn model (~95% accuracy) with role-based Chart.js dashboards.
+              </p>
 
-            <a
-              href="https://github.com/Muhtasim-Masum-Hasnayen/CoverCraft"
-              target="_blank"
-              rel="noreferrer"
-            >
-              GitHub ↗
-            </a>
+              <div className="project-links">
+                <a
+                  href="https://github.com/Shalinihr1402"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  GitHub ↗
+                </a>
+              </div>
+            </div>
+
+            <WorkImage image="2.jpeg" alt="ScholarSense AI Project" />
+          </div>
+
+          {/* Project 03: GMU Voice Assistant */}
+          <div className="work-box" key="gmu-voice-assistant">
+            <div className="work-info">
+              <div className="work-title">
+                <h3>03</h3>
+                <div>
+                  <h4>GMU Voice Assistant</h4>
+                  <p>Multilingual Voice AI for ERP</p>
+                </div>
+              </div>
+
+              <h4>Tools and Features</h4>
+              <p>React.js, Node.js, WebSockets, Vapi, Deepgram, OpenAI, PHP, MySQL</p>
+
+              <p>
+                Intelligent conversational assistant for university ERP supporting
+                English, Hindi, and Kannada. Connected React.js frontends to REST APIs
+                and engineered a Node.js WebSocket pipeline for low-latency voice streaming.
+              </p>
+
+              <div className="project-links">
+                <a
+                  href="https://github.com/Shalinihr1402"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  GitHub ↗
+                </a>
+              </div>
+            </div>
+
+            <WorkImage image="3.jpeg" alt="GMU Intelligent Voice Assistant Project" />
           </div>
         </div>
-
-        <WorkImage image="1.jpeg" alt="CoverCraft Project" />
       </div>
-
-      {/* Project 02: LegitiScan AI */}
-      <div className="work-box" key="legitiscan">
-        <div className="work-info">
-          <div className="work-title">
-            <h3>02</h3>
-            <div>
-              <h4>LegitiScan AI</h4>
-              <p>Product Authenticity Analysis</p>
-            </div>
-          </div>
-
-          <h4>Tools and Features</h4>
-          <p>Python, ResNet50, EasyOCR, Sentence-BERT</p>
-
-          <p>
-            An ongoing AI research project combining computer vision,
-            OCR, and semantic text similarity to analyze cosmetic
-            product authenticity.
-          </p>
-
-          <p>Prototype: 78–81% accuracy on the evaluated dataset.</p>
-          <p>Fake-product recall: 100% on the evaluated dataset.</p>
-
-          <WorkImage image="2.jpeg" alt="LegitiScan AI Project" />
-        </div>
-      </div>
-
-      {/* Project 03: Automation Testing */}
-      <div className="work-box" key="automation-testing">
-        <div className="work-info">
-          <div className="work-title">
-            <h3>03</h3>
-            <div>
-              <h4>E-commerce & HR Automation</h4>
-              <p>Software Quality Assurance</p>
-            </div>
-          </div>
-
-          <h4>Tools and Features</h4>
-          <p>Playwright, JavaScript, Page Object Model</p>
-
-          <p>
-            Automated end-to-end browser workflows for shopping
-            and employee management, including form validation
-            and key user journeys.
-          </p>
-
-          <div className="project-links">
-            <a
-              href="https://github.com/Muhtasim-Masum-Hasnayen/OrangeHRM-Playwright-POM-Automation"
-              target="_blank"
-              rel="noreferrer"
-            >
-              GitHub Profile ↗
-            </a>
-          </div>
-        </div>
-
-        <WorkImage image="3.jpeg" alt="Automation Testing Project" />
-      </div>
-
     </div>
-  </div>
-</div>
   );
 };
 
