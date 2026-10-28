@@ -1,0 +1,221 @@
+.speech-bubble-container {
+  position: absolute;
+  top: clamp(82px, 13.5vh, 115px);
+  left: calc(50% + 20px);
+  right: auto;
+  max-width: min(235px, calc(100vw - 32px));
+  z-index: 30;
+  pointer-events: auto;
+  cursor: pointer;
+  animation: floatBubble 3.5s ease-in-out infinite;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  box-sizing: border-box;
+}
+
+.speech-bubble-box {
+  position: relative;
+  background: rgba(14, 10, 22, 0.88);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  border-radius: 18px;
+  padding: 12px 18px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.6),
+    0 0 25px rgba(168, 85, 247, 0.35),
+    inset 0 0 15px rgba(168, 85, 247, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: auto;
+  max-width: 235px;
+  user-select: none;
+  box-sizing: border-box;
+}
+
+/* Glowing Neon Gradient Border */
+.speech-bubble-box::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 20px;
+  padding: 2px;
+  background: linear-gradient(135deg, #c084fc 0%, #ec4899 50%, #38bdf8 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  box-shadow: 0 0 15px rgba(192, 132, 252, 0.6);
+}
+
+/* Sparkles */
+.speech-sparkle {
+  position: absolute;
+  color: #f472b6;
+  font-size: 13px;
+  pointer-events: none;
+  animation: pulseSparkle 2s ease-in-out infinite alternate;
+}
+
+.sparkle-top {
+  top: -8px;
+  right: -6px;
+  color: #38bdf8;
+  font-size: 15px;
+}
+
+.sparkle-bottom {
+  bottom: -6px;
+  left: 20px;
+  color: #c084fc;
+}
+
+/* Header Row */
+.speech-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.speech-title {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, #f472b6 0%, #c084fc 60%, #38bdf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  line-height: 1;
+}
+
+.speech-wave-emoji {
+  font-size: 18px;
+  -webkit-text-fill-color: initial;
+  display: inline-block;
+  animation: waveEmoji 1.5s ease-in-out infinite;
+  transform-origin: 70% 70%;
+}
+
+.speech-sound-btn {
+  background: rgba(168, 85, 247, 0.15);
+  border: 1px solid rgba(168, 85, 247, 0.35);
+  color: #e9d5ff;
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.speech-sound-btn:hover {
+  background: rgba(168, 85, 247, 0.35);
+  color: #ffffff;
+  transform: scale(1.1);
+}
+
+.speech-subtitle {
+  font-size: 13px;
+  font-weight: 500;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.35;
+  letter-spacing: 0.1px;
+}
+
+/* Speech Bubble Tail pointing left toward anime girl's cheek */
+.speech-bubble-tail {
+  position: absolute;
+  left: -10px;
+  bottom: 14px;
+  width: 0;
+  height: 0;
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  border-right: 10px solid #1a1226;
+  filter: drop-shadow(-3px 0 6px rgba(168, 85, 247, 0.4));
+}
+
+/* Animations */
+@keyframes floatBubble {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+@keyframes pulseSparkle {
+  0% {
+    opacity: 0.4;
+    transform: scale(0.8) rotate(0deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.2) rotate(15deg);
+  }
+}
+
+@keyframes waveEmoji {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  20%, 60% {
+    transform: rotate(14deg);
+  }
+  40%, 80% {
+    transform: rotate(-10deg);
+  }
+}
+
+/* Responsive */
+@media screen and (max-width: 1024px) {
+  .speech-bubble-container {
+    left: 50%;
+    transform: translateX(-50%);
+    top: 6px;
+    max-width: min(240px, calc(100vw - 32px));
+    animation: floatBubbleMobile 3.5s ease-in-out infinite;
+  }
+
+  .speech-bubble-box {
+    padding: 10px 14px;
+    max-width: 240px;
+  }
+
+  .speech-title {
+    font-size: 18px;
+  }
+
+  .speech-subtitle {
+    font-size: 12px;
+  }
+
+  .speech-bubble-tail {
+    left: 50%;
+    top: 100%;
+    transform: translateX(-50%);
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-top: 9px solid #1a1226;
+    border-bottom: none;
+    filter: drop-shadow(0 3px 6px rgba(168, 85, 247, 0.4));
+  }
+}
+
+@keyframes floatBubbleMobile {
+  0%, 100% {
+    transform: translateX(-50%) translateY(0px);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-5px);
+  }
+}

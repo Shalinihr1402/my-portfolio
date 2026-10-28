@@ -103,7 +103,7 @@ const projects: Project[] = [
       "Tailwind CSS",
       "Sensor Telemetry",
     ],
-    image: "/images/1.jpeg",
+    image: "/images/Rockfall-Prediction.jpg",
     github: "https://github.com/Shalinihr1402",
   },
 ];

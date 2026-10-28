@@ -12,7 +12,7 @@ export function setCharTimeline(
 
   // Set initial desktop position on the right side
   if (window.innerWidth > 1024) {
-    gsap.set(".character-model", { x: "24%", opacity: 1 });
+    gsap.set(".character-model", { x: "20%", opacity: 1 });
   }
 
   // Timeline 1: Hero -> About transition
@@ -63,7 +63,7 @@ export function setCharTimeline(
       .to(".hero-content", { opacity: 0, y: -40, duration: 0.5, ease: "power2.in" }, 0)
       .fromTo(
         ".character-model",
-        { x: "24%" },
+        { x: "20%" },
         { x: "-26%", duration: 1, ease: "power1.inOut" },
         0
       )
@@ -88,30 +88,19 @@ export function setCharTimeline(
 
     // Scroll 2: About Me to Technical Skills
     // - About Me fades out smoothly
-    // - Character stays comfortably on left (-26%)
-    // - Camera pulls back to a balanced 3/4 framing (z: 26.0)
-    // - Character turns slightly (y: 0.45) looking toward the skills cards on right
+    // - Standing character model smoothly fades out as Technical Skills sitting girl takes the spotlight
     tl2
       .to(".about-section", { opacity: 0, y: -30, duration: 0.6, ease: "power2.in" }, 0)
       .to(
-        camera.position,
-        { z: 26.0, y: 13.1, duration: 1, ease: "power1.inOut" },
-        0
-      )
-      .to(
-        character.rotation,
-        { y: 0.45, duration: 1, ease: "power1.inOut" },
+        ".character-model",
+        { opacity: 0, duration: 0.5, ease: "power1.inOut" },
         0
       )
       .to(
         ".character-rim",
-        { opacity: 0.5, scale: 1.1, duration: 1 },
+        { opacity: 0, duration: 0.5 },
         0
       );
-
-    if (neckBone) {
-      tl2.to(neckBone.rotation, { x: 0.15, duration: 1 }, 0);
-    }
 
     // Scroll 3: Skills to Career & Work
     // - Character model smoothly fades out so Career and Projects have full-screen canvas

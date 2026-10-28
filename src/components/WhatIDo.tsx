@@ -82,6 +82,15 @@ const WhatIDo = () => {
           </div>
         </div>
       </div>
+
+      {/* Right Column: 3D Anime Girl sitting at desk facing laptop typing */}
+      <div className="skills-character-col">
+        <img
+          src="/images/girl-typing.png"
+          alt="Shalini working at laptop"
+          className="skills-character-img"
+        />
+      </div>
     </div>
   );
 };

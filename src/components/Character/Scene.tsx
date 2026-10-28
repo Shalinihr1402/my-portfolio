@@ -10,8 +10,10 @@ import {
   handleHeadRotation,
   handleTouchMove,
 } from "./utils/mouseUtils";
+import { handleGreetingAnimation } from "./utils/waveUtils";
 import setAnimations from "./utils/animationUtils";
 import { setProgress } from "../Loading";
+import SpeechBubble from "./SpeechBubble";
 
 const Scene = () => {
   const canvasDiv = useRef<HTMLDivElement | null>(null);
@@ -44,6 +46,12 @@ const Scene = () => {
       camera.updateProjectionMatrix();
 
       let headBone: THREE.Object3D | null = null;
+      let jawBone: THREE.Object3D | null = null;
+      let rEyeBone: THREE.Object3D | null = null;
+      let lEyeBone: THREE.Object3D | null = null;
+      let rUpperArm: THREE.Object3D | null = null;
+      let rForeArm: THREE.Object3D | null = null;
+      let rHand: THREE.Object3D | null = null;
       let screenLight: any | null = null;
       let mixer: THREE.AnimationMixer;
 
@@ -61,11 +69,20 @@ const Scene = () => {
           let character = gltf.scene;
           setChar(character);
           scene.add(character);
+
+          // Skeletal bones for greeting, face expressions, and lip-sync
           headBone =
             character.getObjectByName("CC_Base_Head_040") ||
             character.getObjectByName("spine006") ||
             null;
+          jawBone = character.getObjectByName("CC_Base_JawRoot_042") || null;
+          rEyeBone = character.getObjectByName("CC_Base_R_Eye_047") || null;
+          lEyeBone = character.getObjectByName("CC_Base_L_Eye_048") || null;
+          rUpperArm = character.getObjectByName("CC_Base_R_Upperarm_076") || null;
+          rForeArm = character.getObjectByName("CC_Base_R_Forearm_079") || null;
+          rHand = character.getObjectByName("CC_Base_R_Hand_083") || null;
           screenLight = character.getObjectByName("screenlight") || null;
+
           progress.loaded().then(() => {
             setTimeout(() => {
               light.turnOnLights();
@@ -112,6 +129,7 @@ const Scene = () => {
       const animate = () => {
         requestAnimationFrame(animate);
         const delta = clock.getDelta();
+        const elapsedTime = clock.getElapsedTime();
         if (mixer) {
           mixer.update(delta);
         }
@@ -125,6 +143,20 @@ const Scene = () => {
             THREE.MathUtils.lerp
           );
         }
+        // Lifelike anime greeting: looks at visitor, waves open palm, lip-syncs, blinks & winks
+        handleGreetingAnimation(
+          {
+            head: headBone,
+            jaw: jawBone,
+            rEye: rEyeBone,
+            lEye: lEyeBone,
+            rUpperArm,
+            rForeArm,
+            rHand,
+          },
+          elapsedTime,
+          window.scrollY
+        );
         if (screenLight) {
           light.setPointLight(screenLight);
         }
@@ -156,6 +188,7 @@ const Scene = () => {
         <div className="character-model" ref={canvasDiv}>
           <div className="character-rim"></div>
           <div className="character-hover" ref={hoverDivRef}></div>
+          <SpeechBubble />
         </div>
       </div>
     </>

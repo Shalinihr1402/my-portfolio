@@ -19,9 +19,9 @@ const setCharacter = (
         async (gltf) => {
           const character = gltf.scene;
 
-          // Scale and frame the anime girl nicely in the hero camera view
-          character.scale.set(6.2, 6.2, 6.2);
-          character.position.set(0, 4.4, 0);
+          // Position the anime girl higher up so she frames nicely near the speech bubble
+          character.scale.set(6.0, 6.0, 6.0);
+          character.position.set(0, 4.65, 0);
 
           character.traverse((child: any) => {
             if (child.isMesh) {
