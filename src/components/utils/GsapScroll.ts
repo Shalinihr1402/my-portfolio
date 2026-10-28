@@ -48,11 +48,6 @@ export function setCharTimeline(
     },
   });
 
-  const neckBone =
-    character.getObjectByName("CC_Base_NeckTwist02_039") ||
-    character.getObjectByName("CC_Base_NeckTwist01_038") ||
-    character.getObjectByName("CC_Base_Head_040");
-
   if (window.innerWidth > 1024) {
     // Scroll 1: Hero to About Me
     // - Hero text fades and floats up

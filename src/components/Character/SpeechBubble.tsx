@@ -7,7 +7,6 @@ interface SpeechBubbleProps {
 }
 
 const SpeechBubble = ({ visible = true }: SpeechBubbleProps) => {
-  const [hasSpoken, setHasSpoken] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [isScrolledPastHero, setIsScrolledPastHero] = useState(false);
 
@@ -36,7 +35,6 @@ const SpeechBubble = ({ visible = true }: SpeechBubbleProps) => {
     }
 
     window.speechSynthesis.speak(utterance);
-    setHasSpoken(true);
   };
 
   useEffect(() => {

@@ -54,6 +54,14 @@ const Scene = () => {
       let rHand: THREE.Object3D | null = null;
       let screenLight: any | null = null;
       let mixer: THREE.AnimationMixer;
+      let characterModel: THREE.Object3D | null = null;
+
+      const onResize = () => {
+        if (characterModel) {
+          handleResize(renderer, camera, canvasDiv, characterModel);
+        }
+      };
+      window.addEventListener("resize", onResize);
 
       const clock = new THREE.Clock();
 
@@ -67,6 +75,7 @@ const Scene = () => {
           hoverDivRef.current && animations.hover(gltf, hoverDivRef.current);
           mixer = animations.mixer;
           let character = gltf.scene;
+          characterModel = character;
           setChar(character);
           scene.add(character);
 
@@ -89,9 +98,6 @@ const Scene = () => {
               animations.startIntro();
             }, 2500);
           });
-          window.addEventListener("resize", () =>
-            handleResize(renderer, camera, canvasDiv, character)
-          );
         }
       });
 
@@ -167,9 +173,7 @@ const Scene = () => {
         clearTimeout(debounce);
         scene.clear();
         renderer.dispose();
-        window.removeEventListener("resize", () =>
-          handleResize(renderer, camera, canvasDiv, character!)
-        );
+        window.removeEventListener("resize", onResize);
         if (canvasDiv.current) {
           canvasDiv.current.removeChild(renderer.domElement);
         }
