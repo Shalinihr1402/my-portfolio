@@ -80,35 +80,6 @@ const WhatIDo = () => {
               <span className="skill-tag">MySQL</span>
             </div>
           </div>
-
-          {/* Pillar 3: DSA & Software Engineering */}
-          <div className="skill-card skill-card-dsa">
-            <div className="skill-card-top">
-              <div className="skill-icon-wrap">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="16 18 22 12 16 6"></polyline>
-                  <polyline points="8 6 2 12 8 18"></polyline>
-                </svg>
-              </div>
-              <span className="skill-badge">FOUNDATIONS</span>
-            </div>
-
-            <h3 className="skill-title">DSA & Software Engineering</h3>
-            <p className="skill-desc">
-              Strong core computer science foundation with disciplined complexity analysis (time & space), modular object-oriented design, and clean architecture. Solved 130+ LeetCode problems in Java.
-            </p>
-
-            <div className="skill-tags-group">
-              <span className="skill-tag skill-tag-accent">Java</span>
-              <span className="skill-tag">Data Structures</span>
-              <span className="skill-tag">Algorithms</span>
-              <span className="skill-tag skill-tag-accent">130+ LeetCode Solved</span>
-              <span className="skill-tag">OOP</span>
-              <span className="skill-tag">Problem Solving</span>
-              <span className="skill-tag">Clean Architecture</span>
-              <span className="skill-tag">Git & CI/CD</span>
-            </div>
-          </div>
         </div>
       </div>
     </div>

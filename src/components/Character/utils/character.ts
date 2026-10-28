@@ -33,11 +33,18 @@ const setCharacter = (
               if (mesh.material) {
                 const mat = mesh.material as any;
                 mat.side = THREE.DoubleSide;
-                mat.roughness = Math.min(mat.roughness ?? 0.7, 0.75);
+                // Alpha mask & depth settings to ensure glasses, bangs, and green eyes render sharply
+                mat.alphaTest = 0.2;
+                mat.depthWrite = true;
+                mat.depthTest = true;
+                mat.transparent = false;
+                mat.roughness = Math.min(mat.roughness ?? 0.65, 0.75);
                 mat.metalness = Math.min(mat.metalness ?? 0.05, 0.1);
                 if (mat.map) {
                   mat.map.colorSpace = THREE.SRGBColorSpace;
+                  mat.map.needsUpdate = true;
                 }
+                mat.needsUpdate = true;
               }
             }
           });

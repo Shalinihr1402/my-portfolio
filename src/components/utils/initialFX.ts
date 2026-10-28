@@ -33,7 +33,7 @@ export function initialFX() {
 
   // Fade in navbar and floating navigation elements
   gsap.fromTo(
-    [".header", ".icons-section", ".nav-fade"],
+    [".header", ".nav-fade"],
     { opacity: 0 },
     {
       opacity: 1,

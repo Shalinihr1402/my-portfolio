@@ -13,8 +13,8 @@ const Navbar = () => {
     smoother = ScrollSmoother.create({
       wrapper: "#smooth-wrapper",
       content: "#smooth-content",
-      smooth: 1.7,
-      speed: 1.7,
+      smooth: 1.4,
+      speed: 1.4,
       effects: true,
       autoResize: true,
       ignoreMobileResize: true,
@@ -23,23 +23,41 @@ const Navbar = () => {
     smoother.scrollTop(0);
     smoother.paused(true);
 
-    let links = document.querySelectorAll(".header ul a");
-    links.forEach((elem) => {
-      let element = elem as HTMLAnchorElement;
-      element.addEventListener("click", (e) => {
-        if (window.innerWidth > 1024) {
-          e.preventDefault();
-          let elem = e.currentTarget as HTMLAnchorElement;
-          let section = elem.getAttribute("data-href");
-          if (section) {
-            smoother.scrollTo(section, true, "top top");
+    const handleLinkClick = (e: Event) => {
+      const anchor = e.currentTarget as HTMLAnchorElement;
+      const href = anchor.getAttribute("data-href") || anchor.getAttribute("href");
+      if (href && href.startsWith("#")) {
+        e.preventDefault();
+        const targetElement = document.querySelector(href);
+        if (targetElement) {
+          if (smoother && typeof smoother.scrollTo === "function") {
+            smoother.scrollTo(targetElement, true, "top top");
+          } else {
+            targetElement.scrollIntoView({ behavior: "smooth" });
           }
         }
-      });
+      }
+    };
+
+    const links = document.querySelectorAll<HTMLAnchorElement>(
+      ".header ul a, .hero-actions a[href^='#']"
+    );
+    links.forEach((link) => {
+      link.addEventListener("click", handleLinkClick);
     });
-    window.addEventListener("resize", () => {
+
+    const handleResize = () => {
       ScrollSmoother.refresh(true);
-    });
+      ScrollTrigger.refresh();
+    };
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      links.forEach((link) => {
+        link.removeEventListener("click", handleLinkClick);
+      });
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   return (
@@ -86,14 +104,6 @@ const Navbar = () => {
           <span className="logo-text">
             SHALU<span>.</span>
           </span>
-        </a>
-
-        <a
-          href="mailto:shalinidvg16@gmail.com"
-          className="navbar-connect"
-          data-cursor="disable"
-        >
-          shalinidvg16@gmail.com
         </a>
 
         <ul>

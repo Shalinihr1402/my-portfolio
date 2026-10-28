@@ -1,277 +1,256 @@
-import "./styles/Work.css";
-import WorkImage from "./WorkImage";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
+import { MdArrowOutward } from "react-icons/md";
+import { FaGithub } from "react-icons/fa";
+import "./styles/Work.css";
 
-gsap.registerPlugin(useGSAP);
+gsap.registerPlugin(ScrollTrigger);
+
+interface Project {
+  id: string;
+  number: string;
+  title: string;
+  category: string;
+  problem: string;
+  solution: string;
+  tags: string[];
+  image: string;
+  github: string;
+}
+
+const projects: Project[] = [
+  {
+    id: "ai-career-counselor",
+    number: "01",
+    title: "AI Career Counselor",
+    category: "LLM RAG • Career Intelligence System",
+    problem:
+      "Job seekers struggle to understand exact prerequisite skill deficits between their resume and target technical industry roles, lacking structured guidance.",
+    solution:
+      "Engineered an automated resume parsing pipeline with PyMuPDF and Groq LLM returning structured JSON. Matched skills against 1,000+ O*NET careers via vector embeddings in Supabase PostgreSQL, dynamically generating personalized weekly learning roadmaps.",
+    tags: [
+      "Python",
+      "FastAPI",
+      "Groq LLM",
+      "React",
+      "TypeScript",
+      "Supabase PostgreSQL",
+      "PyMuPDF",
+      "Vector Search",
+    ],
+    image: "/images/AI-Career-Councelor1.jpeg",
+    github: "https://github.com/Shalinihr1402",
+  },
+  {
+    id: "scholarsense-ai",
+    number: "02",
+    title: "ScholarSense AI",
+    category: "Computer Vision • OCR Document Verification",
+    problem:
+      "Scholarship disbursement teams waste weeks manually reviewing student certificates and academic marksheets, making tampering and discrepancy detection challenging.",
+    solution:
+      "Automated document verification system using Tesseract OCR and OpenCV image pre-processing. Flags fraudulent or inconsistent submissions with a trained scikit-learn classifier (~95% accuracy) and role-based Chart.js audit dashboards.",
+    tags: [
+      "Python",
+      "Flask",
+      "Tesseract OCR",
+      "OpenCV",
+      "scikit-learn",
+      "MySQL",
+      "Chart.js",
+    ],
+    image: "/images/Scholar-sense-ai.jpeg",
+    github: "https://github.com/Shalinihr1402",
+  },
+  {
+    id: "gmu-voice-assistant",
+    number: "03",
+    title: "GMU Intelligent Voice Assistant",
+    category: "Multilingual Voice AI • University ERP Integration",
+    problem:
+      "Navigating enterprise ERP portals on mobile devices is friction-heavy and inaccessible for students and faculty across multiple regional languages.",
+    solution:
+      "Conversational ERP voice assistant supporting English, Hindi, and Kannada. Connected React.js client interfaces to PHP REST APIs and engineered a Node.js WebSocket pipeline for low-latency streaming audio with Deepgram and OpenAI.",
+    tags: [
+      "React.js",
+      "Node.js",
+      "WebSockets",
+      "Deepgram",
+      "OpenAI",
+      "PHP",
+      "MySQL",
+      "Vapi",
+    ],
+    image: "/images/Gmu-Voice-Assistant.jpeg",
+    github: "https://github.com/Shalinihr1402",
+  },
+  {
+    id: "rockfall-prediction",
+    number: "04",
+    title: "Rockfall Hazard Prediction & Alert System",
+    category: "Geotechnical AI • Smart India Hackathon",
+    problem:
+      "Open-pit mining environments face catastrophic safety hazards from unexpected rock slope failures, wall collapses, and lack of real-time early warning telemetry.",
+    solution:
+      "Engineered an automated slope hazard monitoring platform analyzing geotechnical sensor telemetry with an ML classifier (~80% evaluation accuracy), featuring interactive risk heatmaps and automated alert dispatches.",
+    tags: [
+      "Python",
+      "scikit-learn",
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Sensor Telemetry",
+    ],
+    image: "/images/1.jpeg",
+    github: "https://github.com/Shalinihr1402",
+  },
+];
 
 const Work = () => {
-  useGSAP(() => {
-    let translateX: number = 0;
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
-    function setTranslateX() {
-      const box = document.getElementsByClassName("work-box");
-      const container = document.querySelector(".work-container");
-      if (!box || box.length === 0 || !container) return;
-      const rectLeft = container.getBoundingClientRect().left;
-      const rect = box[0].getBoundingClientRect();
-      const parentWidth = box[0].parentElement!.getBoundingClientRect().width;
-      let padding: number =
-        parseInt(window.getComputedStyle(box[0]).padding) / 2;
-      translateX = rect.width * box.length - (rectLeft + parentWidth) + padding;
-    }
-
-    setTranslateX();
-
-    let timeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: ".work-section",
-        start: "top top",
-        end: () => `+=${translateX > 0 ? translateX : 2000}`,
-        scrub: true,
-        pin: true,
-        id: "work",
-        invalidateOnRefresh: true,
-      },
-    });
-
-    timeline.to(".work-flex", {
-      x: () => -translateX,
-      ease: "none",
+  useEffect(() => {
+    cardsRef.current.forEach((card) => {
+      if (!card) return;
+      gsap.fromTo(
+        card,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: card,
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
     });
 
     return () => {
-      timeline.kill();
-      ScrollTrigger.getById("work")?.kill();
+      ScrollTrigger.getAll().forEach((trigger) => {
+        if (trigger.vars.id === "work") trigger.kill();
+      });
     };
   }, []);
 
   return (
-    <div className="work-section" id="work">
-      <div className="work-container section-container">
-        <h2>
-          Featured <span>Projects</span>
-        </h2>
-
-        <div className="work-flex">
-          {/* Project 01: Rockfall Prediction & Alert System */}
-          <div className="work-box" key="rockfall-prediction">
-            <div className="work-info">
-              <div className="work-title">
-                <h3>01</h3>
-                <div>
-                  <h4>Rockfall Prediction & Alert System</h4>
-                  <p className="work-category">Geotechnical AI &bull; Smart India Hackathon</p>
-                </div>
-              </div>
-
-              <div className="work-section-block">
-                <h5>Problem</h5>
-                <p>
-                  Open-pit mining environments face catastrophic safety hazards from unexpected rock slope failures, wall collapses, and lack of real-time early warning telemetry.
-                </p>
-              </div>
-
-              <div className="work-section-block">
-                <h5>Solution & Architecture</h5>
-                <p>
-                  Engineered an automated slope hazard monitoring platform analyzing geotechnical sensor telemetry with an ML classifier (~80% evaluation accuracy), featuring interactive risk heatmaps and automated alert dispatches.
-                </p>
-              </div>
-
-              <div className="work-section-block">
-                <h5>Tech Stack</h5>
-                <div className="work-tags-flex">
-                  <span>Python</span>
-                  <span>scikit-learn</span>
-                  <span>Next.js</span>
-                  <span>React</span>
-                  <span>TypeScript</span>
-                  <span>Tailwind CSS</span>
-                </div>
-              </div>
-
-              <div className="project-links">
-                <a
-                  href="https://github.com/Shalinihr1402"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="project-btn"
-                  data-cursor="disable"
-                >
-                  GitHub Repository ↗
-                </a>
-              </div>
-            </div>
-
-            <WorkImage image="1.jpeg" alt="Rockfall Hazard Prediction & Alert System" />
+    <section className="work-section" id="work">
+      <div className="work-container">
+        {/* Section Header */}
+        <div className="work-header">
+          <div className="work-pill">
+            <span className="work-pill-dot"></span>
+            <span>WHAT I'VE DONE & BUILT</span>
           </div>
+          <h2 className="work-main-title">
+            My <span className="work-gradient-text">Work</span>
+          </h2>
+          <p className="work-subtitle">
+            A curated showcase of real-world AI/ML pipelines, computer vision systems,
+            multilingual conversational assistants, and full-stack software applications.
+          </p>
+        </div>
 
-          {/* Project 02: AI Career Counselor */}
-          <div className="work-box" key="ai-career-counselor">
-            <div className="work-info">
-              <div className="work-title">
-                <h3>02</h3>
-                <div>
-                  <h4>AI Career Counselor</h4>
-                  <p className="work-category">LLM RAG &bull; Resume Skill Gap Analysis</p>
+        {/* Project Cards List */}
+        <div className="work-projects-list">
+          {projects.map((project, index) => {
+            const isEven = index % 2 === 1;
+            return (
+              <div
+                key={project.id}
+                ref={(el) => (cardsRef.current[index] = el)}
+                className={`project-card ${isEven ? "project-card-reversed" : ""}`}
+              >
+                {/* Information Column */}
+                <div className="project-card-info">
+                  <div className="project-card-header">
+                    <span className="project-index-badge">{project.number}</span>
+                    <div>
+                      <h3 className="project-card-title">{project.title}</h3>
+                      <p className="project-card-category">{project.category}</p>
+                    </div>
+                  </div>
+
+                  <div className="project-detail-block">
+                    <span className="project-detail-label">PROBLEM</span>
+                    <p className="project-detail-text">{project.problem}</p>
+                  </div>
+
+                  <div className="project-detail-block">
+                    <span className="project-detail-label">SOLUTION & ARCHITECTURE</span>
+                    <p className="project-detail-text">{project.solution}</p>
+                  </div>
+
+                  <div className="project-detail-block">
+                    <span className="project-detail-label">TECH STACK</span>
+                    <div className="project-tags-wrap">
+                      {project.tags.map((tag) => (
+                        <span key={tag} className="project-tech-tag">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="project-actions-row">
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="project-github-btn"
+                      data-cursor="disable"
+                    >
+                      <FaGithub size={16} />
+                      <span>GitHub Repository</span>
+                      <MdArrowOutward size={16} />
+                    </a>
+                  </div>
+                </div>
+
+                {/* Mockup Preview Column */}
+                <div className="project-card-preview">
+                  <div className="project-window-frame">
+                    <div className="project-window-bar">
+                      <div className="window-dots">
+                        <span className="dot dot-red"></span>
+                        <span className="dot dot-yellow"></span>
+                        <span className="dot dot-green"></span>
+                      </div>
+                      <span className="window-url-badge">{project.title.toLowerCase().replace(/\s+/g, "-")}.app</span>
+                    </div>
+
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="project-image-link"
+                      data-cursor="disable"
+                    >
+                      <img
+                        src={project.image}
+                        alt={`${project.title} Preview`}
+                        className="project-mockup-img"
+                        loading="lazy"
+                      />
+                      <div className="project-image-overlay">
+                        <span className="project-overlay-pill">
+                          View Code on GitHub <MdArrowOutward />
+                        </span>
+                      </div>
+                    </a>
+                  </div>
                 </div>
               </div>
-
-              <div className="work-section-block">
-                <h5>Problem</h5>
-                <p>
-                  Job seekers struggle to understand exact prerequisite skill deficits between their current resumes and target industry roles.
-                </p>
-              </div>
-
-              <div className="work-section-block">
-                <h5>Solution & Architecture</h5>
-                <p>
-                  Built a multimodal resume parsing pipeline with PyMuPDF and Groq LLM returning structured JSON skills, matching against 1,000+ O*NET careers via vector embeddings to generate personalized weekly learning roadmaps.
-                </p>
-              </div>
-
-              <div className="work-section-block">
-                <h5>Tech Stack</h5>
-                <div className="work-tags-flex">
-                  <span>Python</span>
-                  <span>FastAPI</span>
-                  <span>Groq LLM</span>
-                  <span>LangChain</span>
-                  <span>React</span>
-                  <span>TypeScript</span>
-                  <span>Supabase</span>
-                </div>
-              </div>
-
-              <div className="project-links">
-                <a
-                  href="https://github.com/Shalinihr1402"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="project-btn"
-                  data-cursor="disable"
-                >
-                  GitHub Repository ↗
-                </a>
-              </div>
-            </div>
-
-            <WorkImage image="AI-Career-Councelor1.jpeg" alt="AI Career Counselor Project" />
-          </div>
-
-          {/* Project 03: ScholarSense AI */}
-          <div className="work-box" key="scholarsense-ai">
-            <div className="work-info">
-              <div className="work-title">
-                <h3>03</h3>
-                <div>
-                  <h4>ScholarSense AI</h4>
-                  <p className="work-category">Computer Vision &bull; OCR Document Verification</p>
-                </div>
-              </div>
-
-              <div className="work-section-block">
-                <h5>Problem</h5>
-                <p>
-                  Scholarship disbursement teams waste weeks manually reviewing student certificates and academic marksheets, making error detection challenging.
-                </p>
-              </div>
-
-              <div className="work-section-block">
-                <h5>Solution & Architecture</h5>
-                <p>
-                  Automated document verification system using Tesseract OCR and OpenCV image pre-processing, flagging fraudulent or inconsistent submissions with a trained scikit-learn classifier (~95% accuracy) and Chart.js dashboards.
-                </p>
-              </div>
-
-              <div className="work-section-block">
-                <h5>Tech Stack</h5>
-                <div className="work-tags-flex">
-                  <span>Python</span>
-                  <span>Flask</span>
-                  <span>Tesseract OCR</span>
-                  <span>OpenCV</span>
-                  <span>scikit-learn</span>
-                  <span>MySQL</span>
-                  <span>Chart.js</span>
-                </div>
-              </div>
-
-              <div className="project-links">
-                <a
-                  href="https://github.com/Shalinihr1402"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="project-btn"
-                  data-cursor="disable"
-                >
-                  GitHub Repository ↗
-                </a>
-              </div>
-            </div>
-
-            <WorkImage image="Scholar-sense-ai.jpeg" alt="ScholarSense AI Project" />
-          </div>
-
-          {/* Project 04: GMU Intelligent Voice Assistant */}
-          <div className="work-box" key="gmu-voice-assistant">
-            <div className="work-info">
-              <div className="work-title">
-                <h3>04</h3>
-                <div>
-                  <h4>GMU Voice Assistant</h4>
-                  <p className="work-category">Multilingual Voice AI &bull; Gem Ventures LLP</p>
-                </div>
-              </div>
-
-              <div className="work-section-block">
-                <h5>Problem</h5>
-                <p>
-                  Navigating enterprise ERP systems across thousands of academic records is tedious on mobile and inaccessible for multi-lingual users.
-                </p>
-              </div>
-
-              <div className="work-section-block">
-                <h5>Solution & Architecture</h5>
-                <p>
-                  Conversational ERP voice AI supporting English, Hindi, and Kannada. Built React.js client interfaces connected to REST APIs, and architected a Node.js WebSocket pipeline for low-latency voice streaming with Deepgram and OpenAI.
-                </p>
-              </div>
-
-              <div className="work-section-block">
-                <h5>Tech Stack</h5>
-                <div className="work-tags-flex">
-                  <span>React.js</span>
-                  <span>Node.js</span>
-                  <span>WebSockets</span>
-                  <span>Deepgram</span>
-                  <span>OpenAI</span>
-                  <span>PHP REST</span>
-                  <span>MySQL</span>
-                </div>
-              </div>
-
-              <div className="project-links">
-                <a
-                  href="https://github.com/Shalinihr1402"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="project-btn"
-                  data-cursor="disable"
-                >
-                  GitHub Repository ↗
-                </a>
-              </div>
-            </div>
-
-            <WorkImage image="Gmu-Voice-Assistant.jpeg" alt="GMU Intelligent Voice Assistant Project" />
-          </div>
+            );
+          })}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
